@@ -29,6 +29,10 @@ import java.util.Objects;
 @Slf4j
 public class JacksonDesensitizationSerializer extends JsonSerializer<String> {
 
+    @Override
+    public Class<String> handledType() {
+        return String.class;
+    }
 
     @Override
     public void serialize(String value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
@@ -55,7 +59,7 @@ public class JacksonDesensitizationSerializer extends JsonSerializer<String> {
             Object currentValue = jsonGenerator.getCurrentValue();
             Class<?> currentValueClass = currentValue.getClass();
             Field field = ReflectUtil.getField(currentValueClass, currentName);
-            
+
             Desensitization desensitization = field.getAnnotation(Desensitization.class);
 
             if (Objects.nonNull(desensitization)) {
