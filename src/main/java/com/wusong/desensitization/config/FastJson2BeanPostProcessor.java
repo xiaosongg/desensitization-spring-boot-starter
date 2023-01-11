@@ -1,0 +1,57 @@
+/*
+ * Copyright 2022 lzhpo
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.wusong.desensitization.config;
+
+import cn.hutool.core.util.ArrayUtil;
+import com.alibaba.fastjson2.filter.Filter;
+import com.alibaba.fastjson2.support.config.FastJsonConfig;
+import com.alibaba.fastjson2.support.spring.http.converter.FastJsonHttpMessageConverter;
+import com.wusong.desensitization.serializer.FastJson2DesensitizationValueFilter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+
+/**
+ * @author WuSong
+ * @version 1.0
+ * @date 2023/1/11 20:03
+ * @description
+ */
+@Slf4j
+public class FastJson2BeanPostProcessor implements BeanPostProcessor {
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        if (bean instanceof FastJsonHttpMessageConverter) {
+            FastJsonHttpMessageConverter fastJsonConverter = (FastJsonHttpMessageConverter) bean;
+            FastJsonConfig fastJsonConfig = fastJsonConverter.getFastJsonConfig();
+            Filter[] oldWriterFilters = fastJsonConfig.getWriterFilters();
+
+            FastJson2DesensitizationValueFilter[] injectWriterFilters = {new FastJson2DesensitizationValueFilter()};
+            Filter[] newWriterFilters = ArrayUtil.addAll(oldWriterFilters, injectWriterFilters);
+            fastJsonConfig.setWriterFilters(newWriterFilters);
+
+            log.info(
+                    "Injected [{}] WriterFilter to [{}]",
+                    FastJson2DesensitizationValueFilter.class.getName(),
+                    FastJsonHttpMessageConverter.class.getName());
+
+            return fastJsonConverter;
+        }
+        return bean;
+    }
+}
