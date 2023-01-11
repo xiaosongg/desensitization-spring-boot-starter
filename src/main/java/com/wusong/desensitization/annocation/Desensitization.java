@@ -12,7 +12,7 @@ import java.lang.annotation.*;
  * @author WuSong
  * @version 1.0
  * @date 2023/1/11 11:39
- * @description 脱敏注解，用于属性上，只对String类型有效
+ * @description desensitization
  */
 @Inherited
 @Documented
@@ -30,7 +30,7 @@ public @interface Desensitization {
     DesensitizationStrategy strategy();
 
     /**
-     * Sensitive replacer
+     * desensitization replacer
      *
      * @return replacer
      */
