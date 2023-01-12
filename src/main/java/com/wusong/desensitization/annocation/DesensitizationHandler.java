@@ -1,5 +1,7 @@
 package com.wusong.desensitization.annocation;
 
+import com.wusong.desensitization.handler.CustomizeDesensitizationHandler;
+
 import java.lang.annotation.*;
 
 /**
@@ -13,4 +15,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 public @interface DesensitizationHandler {
+
+    /**
+     * desensitization customizes handler
+     *
+     * @return {@link CustomizeDesensitizationHandler}
+     */
+    Class<? extends CustomizeDesensitizationHandler> value();
 }
