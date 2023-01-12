@@ -22,7 +22,7 @@ public class DesensitizationUtil extends DesensitizedUtil {
      * 只显示第一个汉字，其他替换为2个{@code replacer}。
      *
      * 比如脱敏替换符为星号：
-     * e.g: 刘子豪 -> 刘**
+     * e.g: 邬松 -> 邬**
      * </pre>
      *
      * @param fullName 中文姓名
