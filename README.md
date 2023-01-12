@@ -6,7 +6,7 @@
 
 ## 开源地址
 
-- GitHub：[https://gitee.com/wu-songg/desensitization-spring-boot-starter](https://gitee.com/wu-songg/desensitization-spring-boot-starter)
+- GitHub：[https://github.com/xiaosongg/desensitization-spring-boot-starter](https://github.com/xiaosongg/desensitization-spring-boot-starter)
 - Gitee：[https://gitee.com/wu-songg/desensitization-spring-boot-starter](https://gitee.com/wu-songg/desensitization-spring-boot-starter)
 
 ## 如何使用？
