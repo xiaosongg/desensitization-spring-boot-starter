@@ -200,7 +200,7 @@ public class FaceCustomizeDesensitizationHandler implements CustomizeDesensitiza
     // 字段值
     String fieldValue = desensitizationWrapper.getFieldValue();
     // 注解信息
-      Desensitization desensitization = desensitizationWrapper.getDesensitization();
+    Desensitization desensitization = desensitizationWrapper.getDesensitization();
     return "@#@";
   }
 }
